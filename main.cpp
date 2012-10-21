@@ -1,4 +1,4 @@
-#include <SDL/SDL.h>
+#include "include/Zygote.h"
 #include <string>
 #include <iostream>
 
@@ -11,6 +11,7 @@ const int SCREEN_BBP = 32;
 SDL_Surface *grass = NULL;
 SDL_Surface *water = NULL;
 SDL_Surface *screen = NULL;
+SDL_Surface *zygoteTexture = NULL;
 
 // the event struction that will be used
 SDL_Event event;
@@ -42,7 +43,7 @@ void generateWorld(){
     }
 }
 
-
+Zygote *zygote = new Zygote(zygoteTexture);
 int main(int argc, char** argv)
 {
     // ready to quit?
@@ -94,6 +95,8 @@ bool update()
         }
     }
 
+    apply_surface(zygote->getPosition().x*20, zygote->getPosition().y*20, zygoteTexture, screen);
+
     if(SDL_Flip(screen) == -1)
     {
         return false;
@@ -125,6 +128,7 @@ bool init()
     // Load the images
     grass = load_image("../../pics/grass.bmp");
     water = load_image("../../pics/water.bmp");
+    zygoteTexture = load_image("../../pics/zygote.bmp");
 
     // check for errors loading images
     if(grass == NULL)
@@ -135,6 +139,11 @@ bool init()
     if(water == NULL)
     {
         std::cout << "image for water not found" << std::endl;
+        return false;
+    }
+    if(zygoteTexture == NULL)
+    {
+        std::cout << "image for zygote not found" << std::endl;
         return false;
     }
 
@@ -148,6 +157,7 @@ void cleanUp()
     //Free the surfaces
     SDL_FreeSurface( grass);
     SDL_FreeSurface( water);
+    SDL_FreeSurface( zygoteTexture);
 
     //Quit SDL
     SDL_Quit();
