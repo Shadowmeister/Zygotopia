@@ -4,6 +4,12 @@ extern crate glium;
 fn main() {
     use glium::{DisplayBuild, Surface};
 
+    if cfg!(debug_assertions) {
+        println!("Debug Build!");
+    } else {
+        println!("Release Build!");
+    }
+
     let vertex_shader_src = r#"
         #version 140
 
@@ -25,7 +31,15 @@ fn main() {
     "#;
 
 
-    let display = glium::glutin::WindowBuilder::new().build_glium().unwrap();
+    let display = if cfg!(debug_assertions) {
+        use glium::debug::DebugCallbackBehavior;
+        glium::glutin::WindowBuilder::new().build_glium_debug(DebugCallbackBehavior::DebugMessageOnError).unwrap()
+    } else {
+        use glium::glutin::Robustness;
+        glium::glutin::WindowBuilder::new()
+            .with_gl_robustness(Robustness::NoError)
+            .build_glium().unwrap()
+    };
 
     let vertex1 = Vertex { position: [-0.5, -0.5] };
     let vertex2 = Vertex { position: [ 0.0,  0.5] };
