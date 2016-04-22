@@ -1,0 +1,7 @@
+[package]
+name = "zygotopia"
+version = "0.1.0"
+authors = ["Andrew Kent <DBExShadow@gmail.com>"]
+
+[dependencies]
+glium = "*"
