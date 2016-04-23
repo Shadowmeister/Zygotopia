@@ -3,6 +3,7 @@ name = "zygotopia"
 version = "0.1.0"
 dependencies = [
  "glium 0.14.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tobj 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -357,6 +358,11 @@ dependencies = [
  "rustc_version 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "winapi 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "tobj"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "user32-sys"

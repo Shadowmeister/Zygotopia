@@ -5,3 +5,4 @@ authors = ["Andrew Kent <DBExShadow@gmail.com>"]
 
 [dependencies]
 glium = "*"
+tobj  = "*"
